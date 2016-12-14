@@ -125,5 +125,32 @@ module.exports = {
                     }
                 });
             });
+    },
+    details: function(req, res) {
+        var params = req.query,
+            movie_id = params.movie_id || 0,
+            filter = {};
+            
+            filter.id = movie_id;
+
+        return Item
+            .aggregate()
+            .match(filter)
+            .exec(function(error, items) {
+                if (error) {
+                    return logger.error(error);
+                }
+
+                var list;
+                if (items.length > 0) {
+                list = templateRecord(items[0]);
+                }
+                return res.json({
+                    data: list
+                  
+                });
+            });
+      
     }
+  
 };
