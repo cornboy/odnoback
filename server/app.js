@@ -25,7 +25,7 @@ app.use(morgan('combined', {
     stream: file
 }));
 
-app.get('/', data.index);
+app.get('/stat', data.index);
 app.get('/api/v2/list_movies.json', data.list);
 app.get('/api/v2/movie_details.json', data.details);
 
